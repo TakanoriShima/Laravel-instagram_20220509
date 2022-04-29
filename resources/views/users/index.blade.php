@@ -15,7 +15,16 @@
             @foreach($users as $user)
             <tr>
                 <td>{!! link_to_route('users.show', $user->id , ['id' => $user->id ],[]) !!}</td>
-                <td>{{ $user->name }}</td>
+                <td>
+                    <!--そのユーザーのプロフィールがあるならばアバターアイコンを表示させる-->
+                    @if($user->profile)
+                    <img src="{{ asset('uploads') }}/{{ $user->profile->image }}" alt="{{ $user->profile->image }}" class="avatar">
+                    <!-- プロフィールが未設定の場合は、no_image画像を表示させる。 -->
+                    @else
+                    <img src="{{ asset('images/no_image.jpg') }}" alt="アバター画像は未設定です。" class="no_avatar">
+                    @endif
+                    {!! link_to_route('users.show', $user->name, ['id' => $user->id], []) !!}
+                </td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->created_at }}</td>
             </tr>

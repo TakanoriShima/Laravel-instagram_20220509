@@ -4,7 +4,15 @@ body {
     background: #FFFAF0;
 }
 
-/* プロフィールのアバターアイコン */
+/* アバターアイコンの調整 */
+.avatar,
+.no_avatar {
+    width: 50px;
+    border-radius: 5px;
+}
+
+
+/* users.show のイメージアイコン */
 .image_icon {
     width: 100%;
     border-radius: 10px;
@@ -16,12 +24,14 @@ td img {
     width: 200px;
 }
 
+
 /* 投稿画像一覧(welcome.blade.php) */
 .image_title {
     width: 100%;
     border-radius: 10px;
     box-shadow: 0 0 10px #444444;
 }
+
 
 /*media query*/
 /*ref)*/
