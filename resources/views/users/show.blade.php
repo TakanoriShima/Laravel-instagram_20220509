@@ -10,9 +10,10 @@
             <img src="{{ asset('uploads')}}/{{ $profile->image }}" alt="no image" class="image_icon">
         </div>
         <div class="offset-sm-1 col-sm-3 pt-3">
-            <p>ニックネーム / {{ $profile->nickname }}</p>
-            <p>性別 / {{ $profile->gender === 'man' ? '男性' : '女性' }}</p>
-            <p>自己紹介 / {{ $profile->introduction }}</p>
+            <p>1. ニックネーム : {{ $profile->nickname }}</p>
+            <p>2. 性別 : {{ $profile->gender === 'man' ? '男性' : '女性' }}</p>
+            <p>3. 自己紹介 : <br>{{ $profile->introduction }}</p>
+            <p>{!! link_to_route('users.favorites', 'お気に入り投稿一覧' , ['id' => $user->id ],[]) !!}</p>
         </div>
     </div>
     @else

@@ -49,7 +49,13 @@ Route::group(['middleware' => ['auth']], function () {
     // 画像投稿関係
     Route::resource('posts', 'PostsController');
     
-    // ネスト(あるコントローラーのルーティング内に、別のコントローラーのルーティングを記述)
+    // ネスト
+    Route::group(['prefix' => 'users/{id}'], function () {
+        // いいねした投稿一覧
+        Route::get('favorites', 'UsersController@favorites')->name('users.favorites');
+    });
+    
+    //ネスト
     // ref) https://qiita.com/ntm718/items/95eee03f5294d0c351b0
     Route::group(['prefix' => 'posts/{id}'], function () {
        // 投稿に関するコメント

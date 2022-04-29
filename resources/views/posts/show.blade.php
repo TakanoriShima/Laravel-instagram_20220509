@@ -22,10 +22,10 @@
                 <p>
                 <!--その投稿のユーザーのプロフィールがあるならばアバターアイコンを表示させる-->
                 @if($post->user->profile)
-                <img src="{{ asset('uploads') }}/{{ $post->user->profile->image }}" alt="{{ $post->user->profile->image }}" class="avatar">
+                <img src="{{ asset('uploads') }}/{{ $post->user->profile->image }}" alt="{{ $post->user->profile->image }}" id="avatar">
                 <!-- そうでなければno_image画像を表示させる。 -->
                 @else
-                <img src="{{ asset('images/no_image.jpg') }}" alt="アバター画像は未設定です。" class="no_avatar">
+                <img src="{{ asset('images/no_image.jpg') }}" alt="アバター画像は未設定です。" id="no_avatar">
                 @endif
                 </p>
                 {!! link_to_route('users.show', $post->user->name, ['id' => $post->user->id], []) !!}
