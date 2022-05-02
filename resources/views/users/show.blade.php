@@ -37,7 +37,7 @@
             </tr>
             @foreach($posts as $post)
             <tr>
-                <td>{!! link_to_route('posts.show', $post->id , ['id' => $post->id ],[]) !!}</td>
+                <td>{!! link_to_route('posts.show', $post->id , ['id' => $post->id ],['class' => 'nav-link']) !!}</td>
                 <td>{{ $post->user->name }}</td>
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->content }}</td>
@@ -45,6 +45,7 @@
             </tr>
             @endforeach
         </table>
+        {{ $post->links('pagination::bootstrap-4') }}
     </div>
     @else
     <div class="row mt-3 mb-5">

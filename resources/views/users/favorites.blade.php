@@ -4,8 +4,9 @@
     <div class="text-center">
         <h1 class="text-primary">{{ $user->name }}さんのお気に入り投稿一覧</h1>
     </div>
-    @if(count($posts) !== 0)
+    @if($posts->total() !== 0)
     <div class="row mt-4">
+        <p>お気に入り投稿件数: {{ $posts->total() }}件</p>
         <table class="table table-bordered table-striped text-center">
             <tr>
                 <th>ID</th>
@@ -33,6 +34,7 @@
             </tr>
             @endforeach
         </table>
+        {{ $posts->links('pagination::bootstrap-4') }}
     </div>
     @else
     <div class="row mt-3">
