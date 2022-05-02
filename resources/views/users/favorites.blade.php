@@ -6,7 +6,7 @@
     </div>
     @if($posts->total() !== 0)
     <div class="row mt-4">
-        <p>お気に入り投稿件数: {{ $posts->total() }}件</p>
+        <p class="text-success">現在のお気に入り投稿件数: {{ $posts->total() }}件</p>
         <table class="table table-bordered table-striped text-center">
             <tr>
                 <th>ID</th>
