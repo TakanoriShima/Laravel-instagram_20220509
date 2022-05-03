@@ -11,7 +11,7 @@
 
     <body>
         <header class="mb-4">
-            <nav class="navbar navbar-expand-sm navbar-dark bg-info">
+            <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
                 @if(Auth::check())
                 <a class="navbar-brand" href="/top">会員制写真投稿サイト</a>
                 @else
@@ -27,6 +27,7 @@
                     <!--ログイン認証されている場合-->
                     @if(Auth::check())
                     <li>{!! link_to_route('users.show', Auth::user()->name , ['id' => Auth::user()->id ],['class' => 'navbar-text text-success bg-white p-2 mr-3']) !!}</li>
+                    <li>{!! link_to_route('users.timelines', 'タイムライン', [],['class' => 'nav-link']) !!}</li>
                     <li>{!! link_to_route('users.index', '会員一覧', [],['class' => 'nav-link']) !!}</li>
                     <!--ユーザーが新規プロフィール登録の場合-->
                     @if(!Auth::user()->profile()->get()->first())
@@ -36,6 +37,8 @@
                     @endif
                     <li>{!! link_to_route('posts.create', '新規画像投稿', [], ['class' => 'nav-link']) !!}</li>
                     <li>{!! link_to_route('users.favorites', 'お気に入り投稿一覧', ['id' => Auth::id() ], ['class' => 'nav-link']) !!}</li>
+                    <li>{!! link_to_route('users.followings', 'フォロー一覧', ['id' => Auth::id() ],['class' => 'nav-link']) !!}</li>
+                        <li>{!! link_to_route('users.followers', 'フォローワー一覧', ['id' => Auth::id() ],['class' => 'nav-link']) !!}</li>
                     <li>{!! link_to_route('logout.get', 'ログアウト', [],['class' => 'nav-link']) !!}</li>
                     @endif
                     </ul>

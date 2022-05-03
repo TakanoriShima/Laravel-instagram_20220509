@@ -13,7 +13,7 @@
             <p>ニックネーム / {{ $profile->nickname }}</p>
             <p>性別 / {{ $profile->gender === 'man' ? '男性' : '女性' }}</p>
             <p>自己紹介 / {{ $profile->introduction }}</p>
-            <p>{!! link_to_route('users.favorites', 'お気に入り投稿一覧', ['id' => $user->id ],['class' => 'nav-link']) !!}</p>
+            <p>{!! link_to_route('users.favorites', 'お気に入り投稿一覧', ['id' => $user->id ],['class' => 'nav-link btn btn-info']) !!}</p>
         </div>
     </div>
     @else
@@ -22,11 +22,35 @@
     </div>
     @endif
     
+    <div class="row mt-5">
+        <!-- 現在認証しているユーザーのIDが、注目しているそのユーザーインスタンスの持つIDと違う場合 -->
+        @if(Auth::id() != $user->id)
+            <!--現在認証しているユーザーが持つ、フォロー判定のインスタンスを使うならば-->
+            @if(Auth::user()->is_following($user->id))
+                <!-- フォロー解除ボタンを表示 -->
+                {!! Form::open(['route' => ['user.unfollow', $user->id], 'method' => 'delete', 'class' => 'offset-sm-3 col-sm-6'])  !!}
+                    {!!  Form::submit('フォロー解除', ['class' => 'btn btn-danger btn-block']) !!}
+                {!! Form::close() !!}
+            @else
+                <!--フォローボタンを表示-->
+                {!! Form::open(['route' => ['user.follow', $user->id], 'class' => 'offset-sm-3 col-sm-6'])  !!}
+                    {!!  Form::submit('フォローする', ['class' => 'btn btn-success btn-block']) !!}
+                {!! Form::close() !!}
+            @endif
+        @endif
+    </div>
+    
+    <div class="row mt-5">
+        <p class="col-sm-4">{!! link_to_route('users.favorites', 'お気に入り投稿一覧(' . $user->favorites()->count() . ')', ['id' => $user->id ],['class' => 'nav-link text-center btn btn-warning']) !!}</p>
+        <p class="col-sm-4">{!! link_to_route('users.followings', 'フォロー一覧(' . $user->followings()->count() . ')', ['id' => $user->id ],['class' => 'nav-link text-center btn btn-warning']) !!}</p>
+        <p class="col-sm-4">{!! link_to_route('users.followers', 'フォローワー一覧(' . $user->followers()->count() . ')', ['id' => $user->id ],['class' => 'nav-link text-center btn btn-warning']) !!}</p>
+    </div>
+    
     @if(count($posts) !== 0)
     <div class="text-center mt-5">
         <h2 class="text-success">{{ $user->name }} さんの投稿一覧</h2>
     </div>
-     <div class="row mt-3">
+     <div class="row mt-5">
         <table class="table table-bordered table-striped">
             <tr>
                 <th>ID</th>

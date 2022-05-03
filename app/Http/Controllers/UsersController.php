@@ -42,6 +42,38 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $posts = $user->favorites()->orderBy('id', 'desc')->paginate(5);
+        
+        // viewの呼び出し
         return view('users.favorites', compact('user', 'posts'));
+    }
+    
+    // フォローしている人の一覧表示
+    public function followings($id)
+    {
+        $user = User::find($id);
+        $users = $user->followings()->paginate(10);
+        
+        // viewの呼び出し
+        return view('users.followings', compact('user', 'users'));
+    }
+    
+    // フォローしている人の一覧表示
+    public function followers($id)
+    {
+        $user = User::find($id);
+        $users = $user->followers()->paginate(10);
+        
+        // viewの呼び出し
+        return view('users.followers', compact('user', 'users'));
+    }
+    
+    // タイムラインデータ表示
+    public function timelines()
+    {
+        //　タイムラインデータ取得
+        $posts = \Auth::user()->feed_microposts()->orderBy('id', 'desc')->paginate(3);
+        
+        // viewの呼び出し
+        return view('users.timelines', compact('posts'));
     }
 }
