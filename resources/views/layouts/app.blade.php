@@ -28,6 +28,7 @@
                     @if(Auth::check())
                     <li>{!! link_to_route('users.show', Auth::user()->name , ['id' => Auth::user()->id ],['class' => 'navbar-text text-success bg-white p-2 mr-3']) !!}</li>
                     <li>{!! link_to_route('users.timelines', 'タイムライン', [],['class' => 'nav-link']) !!}</li>
+                    <li>{!! link_to_route('posts.rankings', 'いいねランキング', [],['class' => 'nav-link']) !!}</li>
                     <li>{!! link_to_route('users.index', '会員一覧', [],['class' => 'nav-link']) !!}</li>
                     <!--ユーザーが新規プロフィール登録の場合-->
                     @if(!Auth::user()->profile()->get()->first())
@@ -59,4 +60,3 @@
         <script src="{{ asset('js/script.js') }}"></script>
     </body>
 </html>
-

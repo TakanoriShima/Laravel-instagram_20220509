@@ -52,6 +52,9 @@ Route::group(['middleware' => ['auth']], function () {
     // タイムライン関係
     Route::get('timelines', 'UsersController@timelines')->name('users.timelines');
     
+    // いいねランキング
+    Route::get('rankings', 'PostsController@rankings')->name('posts.rankings');
+    
     // ネスト
     Route::group(['prefix' => 'users/{id}'], function () {
         

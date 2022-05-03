@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('title', '投稿ID: ' . $post->id . 'の詳細')
 @section('content')
-    <div class="text-center text-primary mt-5">
-        <h1>投稿ID: {{ $post->id }} の詳細</h1>
+    <div class="text-center mt-5">
+        <h1 class="text-primary">投稿ID: {{ $post->id }} の詳細</h1>
     </div>
     <table class="table table-bordered table-striped text-center mt-5">
         <tr>
