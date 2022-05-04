@@ -57,9 +57,10 @@ class PostsController extends Controller
         // 入力値の取得
         $title = $request->input('title');
         $content = $request->input('content');
+        $file = $request->file('image');
         
-        // /instagram/storage/app/public/uploadsにアップロードし、名前を変えた相対パスを返す。
-        $path = $request->image->store('public/uploads');
+        // S3用
+        $path = Storage::disk('s3')->putFile('/uploads', $file, 'public');
         
         // パスから、最後の「ファイル名.拡張子」の部分だけ取得
         $image = basename($path);
@@ -137,8 +138,8 @@ class PostsController extends Controller
             // 画像ファイルのアップロード
             // ref) https://qiita.com/ryo-program/items/35bbe8fc3c5da1993366
             if($file) {
-                // /instagram/storage/app/public/uploads にアップロードし、名前を変えた画像ファイルの相対パスを返す    
-                $path = $request->image->store('public/uploads');
+                // S3用
+                $path = Storage::disk('s3')->putFile('/uploads', $file, 'public');
                 // パスから、最後の「ファイル名.拡張子」の部分だけ取得
                 $image = basename($path);
                 

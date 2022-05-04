@@ -23,7 +23,7 @@
                 <!--その投稿のユーザーのプロフィールがあるならばアバターアイコンを表示させる-->
                 @if($post->user->profile)
                 <!-- ファイルはstrage>app>public>uploadsに保存されるが、読み込み時はpublic>storage>uploadsからファイルが読み込まれるため -->
-                <img src="{{ asset('storage/uploads/' . $post->user->profile->image) }}" alt="{{ $post->user->profile->image }}" id="avatar">
+                <img src="{{ Storage::disk('s3')->url('uploads/' . $post->user->profile->image) }}" alt="{{ $post->user->profile->image }}" id="avatar">
                 <!-- そうでなければno_image画像を表示させる。 -->
                 @else
                 <img src="{{ asset('images/no_image.jpg') }}" alt="アバター画像は未設定です。" id="no_avatar">
@@ -33,8 +33,7 @@
             </td>
             <td>{{ $post->title }}</td>
             <td>{{ $post->content }}</td>
-            <!-- ファイルはstrage>app>public>uploadsに保存されるが、読み込み時はpublic>storage>uploadsからファイルが読み込まれるため -->
-            <td><img src="{{ asset('storage/uploads/' . $post->image) }}" alt="{{ $post->image }}"></td>
+            <td><img src="{{ Storage::disk('s3')->url('uploads/' . $post->image) }}" alt="{{ $post->image }}"></td>
             <td>{{ $post->created_at }}</td>
             <td>
                 @if(!Auth::user()->is_favorite($post->id))

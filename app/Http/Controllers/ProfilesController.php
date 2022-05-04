@@ -59,9 +59,10 @@ class ProfilesController extends Controller
         $nickname = $request->input('nickname');
         $gender = $request->input('gender');
         $introduction = $request->input('introduction');
+        $file = $request->file('image');
         
-        // /instagram/storage/app/public/uploads にアップロードし、名前を変えた画像ファイルの相対パスを返す
-        $path = $request->image->store('public/uploads');
+        // S3用
+        $path = Storage::disk('s3')->putFile('/uploads', $file, 'public');
         
         // パスから、最後の「ファイル名.拡張子」の部分だけ取得
         $image = basename($path);
@@ -137,8 +138,8 @@ class ProfilesController extends Controller
             // 画像ファイルのアップロード
             // ref) https://qiita.com/ryo-program/items/35bbe8fc3c5da1993366
             if($file) {
-                // /instagram/storage/app/public/uploads にアップロードし、名前を変えた画像ファイルの相対パスを返す
-                $path = $request->image->store('public/uploads');
+                // S3用
+                $path = Storage::disk('s3')->putFile('/uploads', $file, 'public');
                 // パスから、最後の「ファイル名.拡張子」の部分だけ取得
                 $image = basename($path);
                 
