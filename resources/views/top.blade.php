@@ -15,7 +15,7 @@
                         {!! Form::label('keyword', 'キーワード検索', ['class' => 'text-danger']) !!}
                         {!! Form::text('keyword', old('title'), ['class' => 'form-control mb-3']) !!}
                     </div>
-                    {!! Form::submit('検索', ['class' => 'btn btn-primary btn-block mt-3']) !!}
+                    {!! Form::submit('検索', ['class' => 'btn btn-info btn-block mt-3']) !!}
                 {!! Form::close() !!}
                 
             </div>
