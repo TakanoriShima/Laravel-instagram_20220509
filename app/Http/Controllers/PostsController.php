@@ -202,4 +202,24 @@ class PostsController extends Controller
         // viewの呼び出し
         return view('posts.rankings', compact('posts'));
     }
+    
+    // キーワード検索
+    public function search(Request $request)
+    {
+        // validation
+        $this->validate($request, ['keyword' => 'required']);
+        
+        // 入力されたキーワードを取得
+        $keyword = $request->input('keyword');
+        
+        // 検索(title、またはcontentで部分一致検索)
+        // ref 1) https://biz.addisteria.com/laravel_where/#toc4
+        // ref 2) https://style.potepan.com/articles/22072.html#LIKE
+        $posts = Post::where('title', 'like', '%' . $keyword . '%')->orwhere('content', 'like', '%' . $keyword . '%')->paginate(10);
+        // フラッシュメッセージのセット
+        $flash_message = '検索キーワード: 『 '. $keyword .' 』に' . $posts->count() . '件ヒットしました!!';
+        
+        // viewの呼び出し
+        return view('top', compact('posts', 'flash_message'));
+    }
 }

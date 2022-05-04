@@ -24,24 +24,22 @@
                 <div class="collapse navbar-collapse" id="nav-bar">
                     <ul class="navbar-nav mr-auto"></ul>
                     <ul class="navbar-nav">
-                    <!--ログイン認証されている場合-->
-                    @if(Auth::check())
-                    <li>{!! link_to_route('users.show', Auth::user()->name , ['id' => Auth::user()->id ],['class' => 'navbar-text text-success bg-white p-2 mr-3']) !!}</li>
-                    <li>{!! link_to_route('users.timelines', 'タイムライン', [],['class' => 'nav-link']) !!}</li>
-                    <li>{!! link_to_route('posts.rankings', 'いいねランキング', [],['class' => 'nav-link']) !!}</li>
-                    <li>{!! link_to_route('users.index', '会員一覧', [],['class' => 'nav-link']) !!}</li>
-                    <!--ユーザーが新規プロフィール登録の場合-->
-                    @if(!Auth::user()->profile()->get()->first())
-                    <li>{!! link_to_route('profiles.create', 'プロフィール登録', [], ['class' => 'nav-link']) !!}</li>
-                    @else
-                    <li>{!! link_to_route('profiles.edit', 'プロフィール編集', ['id' => Auth::user()->profile()->get()->first()->id ], ['class' => 'nav-link']) !!}</li>
-                    @endif
-                    <li>{!! link_to_route('posts.create', '新規画像投稿', [], ['class' => 'nav-link']) !!}</li>
-                    <li>{!! link_to_route('users.favorites', 'お気に入り投稿一覧', ['id' => Auth::id() ], ['class' => 'nav-link']) !!}</li>
-                    <li>{!! link_to_route('users.followings', 'フォロー一覧', ['id' => Auth::id() ],['class' => 'nav-link']) !!}</li>
+                        @if(Auth::check())
+                        <li class="navbar-text bg-white p-2 mr-5">{!! link_to_route('users.show', Auth::user()->name , ['id' => Auth::id()], ['class' => 'text-success']) !!}</li>
+                        <li>{!! link_to_route('users.timelines', 'タイムライン', [],['class' => 'nav-link']) !!}</li>
+                        <li>{!! link_to_route('posts.rankings', 'いいね投稿ラインキング', [],['class' => 'nav-link']) !!}</li>
+                        <li>{!! link_to_route('users.index', '会員一覧', [],['class' => 'nav-link']) !!}</li>
+                        @if(!Auth::user()->profile()->get()->first())
+                        <li>{!! link_to_route('profiles.create', 'プロフィール登録', [], ['class' => 'nav-link']) !!}</li>
+                        @else
+                        <li>{!! link_to_route('profiles.edit', 'プロフィール編集', ['id' => Auth::user()->profile()->get()->first()->id ], ['class' => 'nav-link']) !!}</li>
+                        @endif
+                        <li>{!! link_to_route('posts.create', '新規画像投稿', [],['class' => 'nav-link']) !!}</li>
+                        <li>{!! link_to_route('users.favorites', 'お気に入り投稿一覧', ['id' => Auth::id() ],['class' => 'nav-link']) !!}</li>
+                        <li>{!! link_to_route('users.followings', 'フォロー一覧', ['id' => Auth::id() ],['class' => 'nav-link']) !!}</li>
                         <li>{!! link_to_route('users.followers', 'フォローワー一覧', ['id' => Auth::id() ],['class' => 'nav-link']) !!}</li>
-                    <li>{!! link_to_route('logout.get', 'ログアウト', [],['class' => 'nav-link']) !!}</li>
-                    @endif
+                        <li>{!! link_to_route('logout.get', 'ログアウト', [],['class' => 'nav-link']) !!}</li>
+                        @endif
                     </ul>
                 </div>
             </nav>
