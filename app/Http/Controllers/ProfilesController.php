@@ -59,21 +59,12 @@ class ProfilesController extends Controller
         $nickname = $request->input('nickname');
         $gender = $request->input('gender');
         $introduction = $request->input('introduction');
-        $file = $request->image;
         
-        // 参照: https://qiita.com/ryo-program/items/35bbe8fc3c5da1993366
-        // 画像ファイルのアップロード
-        if($file) {
-            // 現在時刻ともともとのファイル名を組み合わせてランダムなファイル名を作成
-            $image = time() .  $file->getClientOriginalName();
-            // アップロードするフォルダ名を取得
-            $target_path = public_path('uploads/');
-            // アップロード処理
-            $file->move($target_path, $image);
-        } else {
-            // 画像ファイルが選択されていなければ空の文字列をセット
-            $image = '';
-        }
+        // /instagram/storage/app/public/uploads にアップロードし、名前を変えた画像ファイルの相対パスを返す
+        $path = $request->image->store('public/uploads');
+        
+        // パスから、最後の「ファイル名.拡張子」の部分だけ取得
+        $image = basename($path);
         
         // 入力情報をもとに新しいインスタンスを作成
         \Auth::user()->profile()->create(['nickname' => $nickname, 'gender' => $gender, 'introduction' => $introduction, 'image' => $image]);
@@ -146,12 +137,11 @@ class ProfilesController extends Controller
             // 画像ファイルのアップロード
             // ref) https://qiita.com/ryo-program/items/35bbe8fc3c5da1993366
             if($file) {
-                // 現在時刻ともともとのファイル名を組み合わせてランダムなファイル名を作成
-                $image = time() .  $file->getClientOriginalName();
-                // アップロードするフォルダ名を取得
-                $target_path = public_path('uploads/');
-                // アップロード処理
-                $file->move($target_path, $image);
+                // /instagram/storage/app/public/uploads にアップロードし、名前を変えた画像ファイルの相対パスを返す
+                $path = $request->image->store('public/uploads');
+                // パスから、最後の「ファイル名.拡張子」の部分だけ取得
+                $image = basename($path);
+                
             } else {
                 // 画像ファイルが選択されていなければ、画像ファイルは元の名前のまま
                 $image = $profile->image;

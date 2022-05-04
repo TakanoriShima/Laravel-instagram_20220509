@@ -12,7 +12,7 @@
     </div>
     <div class="row mt-5">
         @foreach($posts as $post)
-        <div class="col-sm-3 mb-3"><img src="{{ asset('uploads') }}/{{ $post->image }}" alt="{{ $post->image }}" class="image_title"></div>
+        <div class="col-sm-3 mb-3"><img src="{{ asset('storage/uploads/' .  $post->image) }}" alt="{{ $post->image }}" class="image_title"></div>
         @endforeach   
     </div>
 @endsection

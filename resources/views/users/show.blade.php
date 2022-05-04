@@ -7,7 +7,7 @@
     @if($profile)
     <div class="row mt-5">
         <div class="offset-sm-2 col-sm-3">
-            <img src="{{ asset('uploads')}}/{{ $profile->image }}" alt="no image" class="image_icon">
+            <img src="{{ asset('storage/uploads/' .  $profile->image) }}" alt="no image" class="image_icon">
         </div>
         <div class="offset-sm-1 col-sm-3 pt-3">
             <p>ニックネーム / {{ $profile->nickname }}</p>
@@ -73,7 +73,7 @@
     </div>
     @else
     <div class="row mt-5">
-        <p class="col-sm-12 text-center">{{ $user->name }} さんの投稿はまだありません</p>
+        <p class="col-sm-12 text-center text-danger">※{{ $user->name }} さんの投稿はまだありません</p>
     </div>
     @endif
 @endsection
