@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use App\Comment; // 追加
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostsController extends Controller
 {
